@@ -1,0 +1,13 @@
+@import './sass/base/typography';
+@import './sass/Helpers/mixins';
+@import './sass/Helpers/variables';
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  @include flexbox();
+  font-family: 'Poppins', sans-serif;
+  background-color: $light-color;
+  color: $light-text-color;
+}
