@@ -2,12 +2,7 @@
 @import '../Helpers/variables';
 
 .todayWeather {
-    // @include flexbox($direction: column);
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    // space-around
-    align-items: center;
+    @include flexbox($direction: row, $justify: space-around);
 
     &__weather {
         @include flexbox($direction: column);
@@ -19,26 +14,31 @@
         }
 
         &__iconName {
-            
+            font-weight: $font-lighter;
+            font-size: $normal-font-size;
         }
     }
 
     &__temperature {
-        font-size: $bigger-font-size;
+        font-weight: $font-medium;
+        font-size: $mega-font-size;
     }
 
     &__status {
         @include flexbox($direction: column);
 
         &__wind {
+            font-weight: $font-extra-light;
             font-size: $normal-font-size;
         }  
 
         &__precip {
+            font-weight: $font-extra-light;
             font-size: $normal-font-size;
         }
 
         &__pressure {
+            font-weight: $font-extra-light;
             font-size: $normal-font-size;
         }
     }
