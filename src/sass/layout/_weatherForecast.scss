@@ -1,2 +1,10 @@
 @import '../Helpers/mixins';
 @import '../Helpers/variables';
+
+.weatherForecast {
+    width: auto;
+    height: auto;
+    border-radius: $radius;
+    border: 1px solid $white;
+    padding: 10px 50px 50px 50px;
+}
