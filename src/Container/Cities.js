@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { nanoid } from 'nanoid';
-
+import Select from 'react-select'
 
 function City() {
    const [data, setData] = useState([]);
@@ -20,14 +19,32 @@ function City() {
             })
     }, [])
 
+
+    const option = [];
+
+    if(data != null) {
+        data.map((item) => {
+            const obj = new Object();
+            obj.value = `${item.country_name}`
+            obj.label = `${item.country_name}`
+            option.push(obj)
+        }        
+        )
+    }
+
+    function changeHandler(value) {
+        console.log(value.label);
+    }
+
     return (
-        <ul>
-            {
-                data.map((item) => (
-                    <li key={nanoid}>{item.country_name}</li>
-                ))
-            }
-        </ul>
+        <div className="cities">
+            <Select
+                onChange={changeHandler}
+                options={option}
+                isSearchable
+                isClearable
+            />
+        </div>
     )
 }
 
