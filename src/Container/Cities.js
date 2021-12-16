@@ -11,14 +11,14 @@ function City() {
         "Accept": "application/json"
     }
         
-useEffect(() => {
-    const res = axios.get('https://www.universal-tutorial.com/api/countries', {
-    headers: headers
-    })
-       .then(response => {
-           setData(response.data);
+    useEffect(() => {
+        const res = axios.get('https://www.universal-tutorial.com/api/countries', {
+        headers: headers
         })
-}, [])
+        .then(response => {
+            setData(response.data);
+            })
+    }, [])
 
     return (
         <ul>
