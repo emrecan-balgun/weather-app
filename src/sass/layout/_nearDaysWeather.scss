@@ -1,2 +1,27 @@
 @import '../Helpers/mixins';
 @import '../Helpers/variables';
+
+.nearDaysWeather {
+    @include flexbox($direction: row, $justify: space-between   );
+    margin-top: 30px;
+
+    &__information {
+        @include flexbox($direction: column);
+        gap: 10px;
+
+        &__day {
+            font-size: $normal-font-size;
+        }
+    
+        &__icon {
+            height: 50px;
+            width: 50px;
+        }
+    
+        &__temperature {
+            font-size: $small-font-size;
+        }
+    }
+
+    
+}
