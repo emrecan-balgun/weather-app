@@ -13,5 +13,5 @@ export const weatherSlice = createSlice({
 })
 
 export const { changeCity } = weatherSlice.actions;
-export const city = (state) => state.weatherSlice.city;
+export const city = (state) => state.weather.city;
 export default weatherSlice.reducer;
