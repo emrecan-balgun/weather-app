@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 export const weatherSlice = createSlice({
   name: 'weather',
   initialState: {
-    city: 'Istanbul',
+    city: 'Izmir, Turkey',
   },
   reducers: {
     changeCity: (state, action) => {

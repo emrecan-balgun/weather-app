@@ -2,8 +2,14 @@
 @import '../Helpers/variables';
 
 .header {
+    text-align: center;
 
     &__title {
+        width: 600px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-transform: capitalize;
         margin-top: 0px;
         font-size: $mega-font-size;
     }

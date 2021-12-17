@@ -5,6 +5,7 @@
     margin: 10px;
 
     &__input {
+        text-transform: capitalize;
         padding: 10px;
         border-radius: $radius;
     }
