@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { changeCity, city } from '../redux/weatherSlice';
-import { useEffect } from 'react';
 
 function Cities() {
     const dispatch = useDispatch();
