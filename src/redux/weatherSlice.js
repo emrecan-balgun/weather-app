@@ -4,6 +4,8 @@ export const weatherSlice = createSlice({
   name: 'weather',
   initialState: {
     city: 'izmir',
+    latitude: '38.41273',
+    longitude: '27.13838',
     currentMainDescription: '',
     currentDescription: '',
     currentIcon: '',
@@ -15,6 +17,12 @@ export const weatherSlice = createSlice({
   reducers: {
     changeCity: (state, action) => {
       state.city = action.payload;
+    },
+    changeLatitude: (state, action) => {
+      state.latitude = action.payload;
+    },
+    changeLongitude: (state, action) => {
+      state.longitude = action.payload;
     },
     changeCurrentMainDescription: (state, action) => {
       state.currentMainDescription = action.payload; 
@@ -42,6 +50,8 @@ export const weatherSlice = createSlice({
 
 export const { 
   changeCity,
+  changeLatitude,
+  changeLongitude,
   changeCurrentMainDescription,
   changeCurrentDescription,
   changeCurrentIcon,
@@ -52,6 +62,9 @@ export const {
 } = weatherSlice.actions;
 
 export const city = (state) => state.weather.city;
+export const latitude = (state) => state.weather.latitude;
+export const longitude = (state) => state.weather.longitude;
+
 export const currentMainDescription = (state) => state.weather.currentMainDescription;
 export const currentDescription = (state) => state.weather.currentDescription;
 export const currentIcon = (state) => state.weather.currentIcon;

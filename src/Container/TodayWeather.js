@@ -1,7 +1,9 @@
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { 
-    city, 
+    city,
+    latitude,
+    longitude,
     currentMainDescription, 
     currentDescription, 
     currentIcon, 
@@ -15,7 +17,9 @@ import {
     changeCurrentTemperature, 
     changeCurrentWind, 
     changeCurrentHumidity, 
-    changeCurrentPressure
+    changeCurrentPressure,
+    changeLatitude,
+    changeLongitude
 } from '../redux/weatherSlice';
 import { useEffect } from 'react';
 
@@ -23,6 +27,8 @@ function TodayWeather() {
     const dispatch = useDispatch();
 
     const cityName = useSelector(city);
+    const lat = useSelector(latitude);
+    const lon = useSelector(longitude);
     const mainDescription = useSelector(currentMainDescription);
     const description = useSelector(currentDescription);
     const icon = useSelector(currentIcon);
@@ -31,22 +37,46 @@ function TodayWeather() {
     const humidity = useSelector(currentHumidity);
     const pressure = useSelector(currentPressure);
 
+    function getGeocode() {
+         axios(`http://api.positionstack.com/v1/forward?access_key=${process.env.REACT_APP_GECODE_KEY}&query=${cityName}`)
+        .then(response => dispatchGeocode(response.data.data[0]))
+    }
+
+    // useEffect(() => {
+    //     getGeocode();
+
+    //     if(lat != '') {
+    //         axios(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely&units=metric&appid=${process.env.REACT_APP_API_KEY}`)
+    //         .then(response => dispatchData(response.data.current))
+    //     }
+    // }, [cityName])
+
     useEffect(() => {
-        axios(`https://api.openweathermap.org/data/2.5/find?q=${cityName}&units=metric&appid=${process.env.REACT_APP_API_KEY}`)
-        .then(response => dispatchData(response.data.list[0]))
+        getGeocode();
+
+        if(lat != ''){
+            axios(`https://api.openweathermap.org/data/2.5/find?q=${cityName}&units=metric&appid=${process.env.REACT_APP_API_KEY}`)
+            .then(response => dispatchData(response.data.list[0]))
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [cityName])
 
+    function dispatchGeocode(response) {
+        // console.log(response.name);
+        // console.log(response.latitude);
+        // console.log(response.longitude);
+        dispatch(changeLatitude((response.latitude)));
+        dispatch(changeLongitude((response.longitude)));
+    }
+
     function dispatchData(response) {
-        if(response.name) {
-            dispatch(changeCurrentTemperature((response.main.temp)));
-            dispatch(changeCurrentIcon(`http://openweathermap.org/img/w/${response.weather[0].icon}.png`));
-            dispatch(changeCurrentMainDescription((response.weather[0].main)));
-            dispatch(changeCurrentDescription((response.weather[0].description)));
-            dispatch(changeCurrentWind((response.wind.speed)));
-            dispatch(changeCurrentHumidity((response.main.humidity)));
-            dispatch(changeCurrentPressure((response.main.pressure)));
-        }
+        dispatch(changeCurrentTemperature((response.main.temp)));
+        dispatch(changeCurrentIcon(`http://openweathermap.org/img/w/${response.weather[0].icon}.png`));
+        dispatch(changeCurrentMainDescription((response.weather[0].main)));
+        dispatch(changeCurrentDescription((response.weather[0].description)));
+        dispatch(changeCurrentWind((response.wind.speed)));
+        dispatch(changeCurrentHumidity((response.main.humidity)));
+        dispatch(changeCurrentPressure((response.main.pressure)));
     }
 
     return (
