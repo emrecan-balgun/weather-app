@@ -1,12 +1,14 @@
-import react from 'react';
+import { useDispatch } from 'react-redux';
+import { changeCity } from '../redux/weatherSlice';
 
-function City() {
+function Cities() {
+    const dispatch = useDispatch();
+
     return (
         <div className="cities">
             <input 
                 type="text"
-                // value={text}
-                onChange={(e) => console.log(e.target.value)}
+                onChange={(e) => dispatch(changeCity(e.target.value))}
                 className="cities__input"
                 placeholder="Please enter a city name.."
             />
@@ -14,4 +16,4 @@ function City() {
     )
 }
 
-export default City
+export default Cities
