@@ -1,2 +1,11 @@
 @import '../Helpers/mixins';
 @import '../Helpers/variables';
+
+.cities {
+    margin: 10px;
+
+    &__input {
+        padding: 10px;
+        border-radius: $radius;
+    }
+}
