@@ -4,6 +4,7 @@ export const weatherSlice = createSlice({
   name: 'weather',
   initialState: {
     city: 'izmir',
+    currentMainDescription: '',
     currentDescription: '',
     currentIcon: '',
     currentTemperature: '',
@@ -14,6 +15,9 @@ export const weatherSlice = createSlice({
   reducers: {
     changeCity: (state, action) => {
       state.city = action.payload;
+    },
+    changeCurrentMainDescription: (state, action) => {
+      state.currentMainDescription = action.payload; 
     },
     changeCurrentDescription: (state, action) => {
       state.currentDescription = action.payload; 
@@ -38,6 +42,7 @@ export const weatherSlice = createSlice({
 
 export const { 
   changeCity,
+  changeCurrentMainDescription,
   changeCurrentDescription,
   changeCurrentIcon,
   changeCurrentTemperature,
@@ -47,6 +52,7 @@ export const {
 } = weatherSlice.actions;
 
 export const city = (state) => state.weather.city;
+export const currentMainDescription = (state) => state.weather.currentMainDescription;
 export const currentDescription = (state) => state.weather.currentDescription;
 export const currentIcon = (state) => state.weather.currentIcon;
 export const currentTemperature = (state) => state.weather.currentTemperature;

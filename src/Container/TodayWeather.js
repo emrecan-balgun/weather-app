@@ -2,12 +2,14 @@ import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { 
     city, 
+    currentMainDescription, 
     currentDescription, 
     currentIcon, 
     currentTemperature, 
     currentWind,
     currentHumidity, 
     currentPressure, 
+    changeCurrentMainDescription, 
     changeCurrentDescription, 
     changeCurrentIcon, 
     changeCurrentTemperature, 
@@ -21,6 +23,7 @@ function TodayWeather() {
     const dispatch = useDispatch();
 
     const cityName = useSelector(city);
+    const mainDescription = useSelector(currentMainDescription);
     const description = useSelector(currentDescription);
     const icon = useSelector(currentIcon);
     const temperature = useSelector(currentTemperature);
@@ -38,6 +41,7 @@ function TodayWeather() {
         if(response.name) {
             dispatch(changeCurrentTemperature((response.main.temp)));
             dispatch(changeCurrentIcon(`http://openweathermap.org/img/w/${response.weather[0].icon}.png`));
+            dispatch(changeCurrentMainDescription((response.weather[0].main)));
             dispatch(changeCurrentDescription((response.weather[0].description)));
             dispatch(changeCurrentWind((response.wind.speed)));
             dispatch(changeCurrentHumidity((response.main.humidity)));
@@ -48,7 +52,7 @@ function TodayWeather() {
     return (
         <div className="todayWeather">
             <div className="todayWeather__weather">
-                <img className="todayWeather__weather__icon" src={icon} alt="sunny" />
+                <img className="todayWeather__weather__icon" src={icon} alt={mainDescription} />
                 <span className="todayWeather__weather__iconName">{description}</span>
             </div>
             <span className="todayWeather__temperature">{Math.ceil(temperature)}°C</span>

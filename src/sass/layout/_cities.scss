@@ -7,6 +7,12 @@
     &__input {
         text-transform: capitalize;
         padding: 10px;
-        border-radius: $radius;
+        // border-radius: $radius;
+        background: transparent;
+        border: 0;
+        outline: 0;
+        border-bottom: 2px solid $white;
+        text-align: center;
+        color: $white;
     }
 }
