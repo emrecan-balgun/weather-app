@@ -3,6 +3,7 @@
 
 .todayWeather {
     @include flexbox($direction: row, $justify: space-around);
+    gap: 30px;
 
     &__weather {
         @include flexbox($direction: column);

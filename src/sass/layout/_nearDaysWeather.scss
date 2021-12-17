@@ -4,6 +4,7 @@
 .nearDaysWeather {
     @include flexbox($direction: row, $justify: space-between   );
     margin-top: 30px;
+    gap: 30px;
 
     &__information {
         @include flexbox($direction: column);
