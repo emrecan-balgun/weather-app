@@ -1,12 +1,16 @@
 import { useSelector } from 'react-redux';
-import { city } from '../redux/weatherSlice';
+import { city, date } from '../redux/weatherSlice';
+import Moment from 'react-moment';
+import 'moment-timezone';
 
 function Header() {
     const cityName = useSelector(city);
+    const time = useSelector(date);
 
     return (
         <div className="header">
             <h1 className="header__title">{cityName}</h1>
+            <h2 className="header__date"><Moment format="YYYY/MM/DD">{time*1000}</Moment></h2> 
         </div>
     )
 }

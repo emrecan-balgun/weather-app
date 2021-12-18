@@ -13,6 +13,7 @@ import {
     currentWind,
     currentHumidity, 
     currentPressure, 
+    changeDate,
     changeCurrentMainDescription, 
     changeCurrentDescription, 
     changeCurrentIcon, 
@@ -76,6 +77,7 @@ function TodayWeather() {
     }
 
     function dispatchData(response) {
+        dispatch(changeDate(response.dt));
         dispatch(changeCurrentTemperature((response.main.temp)));
         dispatch(changeCurrentMinTemperature((response.main.temp_min)));
         dispatch(changeCurrentMaxTemperature((response.main.temp_max)));

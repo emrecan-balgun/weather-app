@@ -2,15 +2,22 @@
 @import '../Helpers/variables';
 
 .header {
-    text-align: center;
+    @include flexbox($direction: column);
 
     &__title {
         width: 600px;
+        height: min-content;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
         text-transform: capitalize;
         margin-top: 0px;
         font-size: $mega-font-size;
+    }
+
+    &__date {
+        font-weight: $font-extra-light;
+        font-size: $normal-font-size;
+        margin-top: -40px;
     }
 }

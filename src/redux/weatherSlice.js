@@ -6,6 +6,7 @@ export const weatherSlice = createSlice({
     city: 'izmir',
     latitude: '38.41273',
     longitude: '27.13838',
+    date: '',
     currentMainDescription: '',
     currentDescription: '',
     currentIcon: '',
@@ -25,6 +26,9 @@ export const weatherSlice = createSlice({
     },
     changeLongitude: (state, action) => {
       state.longitude = action.payload;
+    },
+    changeDate: (state, action) => {
+      state.date = action.payload;
     },
     changeCurrentMainDescription: (state, action) => {
       state.currentMainDescription = action.payload; 
@@ -60,6 +64,7 @@ export const {
   changeCity,
   changeLatitude,
   changeLongitude,
+  changeDate,
   changeCurrentMainDescription,
   changeCurrentDescription,
   changeCurrentIcon,
@@ -74,6 +79,7 @@ export const {
 export const city = (state) => state.weather.city;
 export const latitude = (state) => state.weather.latitude;
 export const longitude = (state) => state.weather.longitude;
+export const date = (state) => state.weather.date;
 
 export const currentMainDescription = (state) => state.weather.currentMainDescription;
 export const currentDescription = (state) => state.weather.currentDescription;

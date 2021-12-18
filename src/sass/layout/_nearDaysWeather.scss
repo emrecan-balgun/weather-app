@@ -2,13 +2,13 @@
 @import '../Helpers/variables';
 
 .nearDaysWeather {
-    @include flexbox($direction: row, $justify: space-between   );
-    margin-top: 30px;
+    @include flexbox($direction: row, $justify: space-between);
+    margin-top: 40px;
     gap: 30px;
 
     &__information {
         @include flexbox($direction: column);
-        gap: 10px;
+        gap: 15px;
 
         &__day {
             font-weight: $font-medium;

@@ -3,15 +3,16 @@
 
 .todayWeather {
     @include flexbox($direction: row, $justify: space-around);
+    margin-top: 10px;
     gap: 30px;
 
     &__weather {
         @include flexbox($direction: column);
-        gap: 20px;
+        gap: 0px;
 
         &__icon {
-            width: 50px;
-            height: 50px;
+            width: 90px;
+            height: 90px;
         }
 
         &__iconName {
