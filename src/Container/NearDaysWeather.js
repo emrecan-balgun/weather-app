@@ -31,8 +31,6 @@ function NearDaysWeather() {
         newData[i] = data[i];
     }
 
-    console.log(newData);
-
     return (
         <div className="nearDaysWeather">
             {
