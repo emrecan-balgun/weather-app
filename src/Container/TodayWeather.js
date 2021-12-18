@@ -93,7 +93,7 @@ function TodayWeather() {
         <div className="todayWeather">
             <div className="todayWeather__weather">
                 <img className="todayWeather__weather__icon" src={icon} alt={mainDescription} />
-                <span className="todayWeather__weather__iconName">{description}</span>
+                <span className="todayWeather__weather__iconName"><strong>{description}</strong></span>
             </div>
             <div className="todayWeather__temperature">
                 <span className="todayWeather__temperature__information">{Math.ceil(temperature)}°C</span>
@@ -106,9 +106,9 @@ function TodayWeather() {
             </div>
             
             <div className="todayWeather__status">
-                <span className="todayWeather__status__wind">Wind: {wind} kmph</span>
-                <span className="todayWeather__status__precip">Humidity: {humidity}%</span>
-                <span className="todayWeather__status__pressure">Pressure: {pressure} mb</span>
+                <span className="todayWeather__status__wind"><strong>Wind</strong> {wind} kmph</span>
+                <span className="todayWeather__status__precip"><strong>Humidity</strong> {humidity}%</span>
+                <span className="todayWeather__status__pressure"><strong>Pressure</strong> {pressure} mb</span>
             </div>
         </div>
     )

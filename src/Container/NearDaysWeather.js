@@ -1,33 +1,50 @@
-import React from 'react'
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { latitude, longitude } from '../redux/weatherSlice';
+import { nanoid } from 'nanoid';
+import Moment from 'react-moment';
+import 'moment-timezone';
 
 function NearDaysWeather() {
+    const lat = useSelector(latitude);
+    const lon = useSelector(longitude);
+
+    const [data, setData] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    const newData = [];
+
+    useEffect(() => {
+        if(lat != '') {
+            axios(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely&units=metric&appid=${process.env.REACT_APP_API_KEY}`)
+            .then(response => setData(response.data.daily))
+            .catch(e => console.log(e))
+            .finally(() => setIsLoading(false))
+        }
+    }, [lat, lon])
+
+
+    // if you want a 5-day weather forecast it should be this way
+    // in the case of i = 0, it shows the weather today
+    // supports showing the weather for up to 7 days for the future, except today
+    for(let i = 1; i <= 5; i++) {
+        newData[i] = data[i];
+    }
+
     return (
         <div className="nearDaysWeather">
-            <div className="nearDaysWeather__information">
-                <span className="nearDaysWeather__information__day">TUE</span>
-                <img src="https://i.pinimg.com/originals/53/22/c2/5322c2cad533e12e552d0dfdc89b4c25.png" alt="sunny" className="nearDaysWeather__information__icon" />
-                <span className="nearDaysWeather__information__temperature">24°C</span>
-            </div>
-            <div className="nearDaysWeather__information">
-                <span className="nearDaysWeather__information__day">TUE</span>
-                <img src="https://i.pinimg.com/originals/53/22/c2/5322c2cad533e12e552d0dfdc89b4c25.png" alt="sunny" className="nearDaysWeather__information__icon" />
-                <span className="nearDaysWeather__information__temperature">24°C</span>
-            </div>
-            <div className="nearDaysWeather__information">
-                <span className="nearDaysWeather__information__day">TUE</span>
-                <img src="https://i.pinimg.com/originals/53/22/c2/5322c2cad533e12e552d0dfdc89b4c25.png" alt="sunny" className="nearDaysWeather__information__icon" />
-                <span className="nearDaysWeather__information__temperature">24°C</span>
-            </div>
-            <div className="nearDaysWeather__information">
-                <span className="nearDaysWeather__information__day">TUE</span>
-                <img src="https://i.pinimg.com/originals/53/22/c2/5322c2cad533e12e552d0dfdc89b4c25.png" alt="sunny" className="nearDaysWeather__information__icon" />
-                <span className="nearDaysWeather__information__temperature">24°C</span>
-            </div>
-            <div className="nearDaysWeather__information">
-                <span className="nearDaysWeather__information__day">TUE</span>
-                <img src="https://i.pinimg.com/originals/53/22/c2/5322c2cad533e12e552d0dfdc89b4c25.png" alt="sunny" className="nearDaysWeather__information__icon" />
-                <span className="nearDaysWeather__information__temperature">24°C</span>
-            </div>
+            {
+                isLoading 
+                ? <div>Loading..</div>
+                : newData.map(data => 
+                    <div className="nearDaysWeather__information" key={nanoid()}>
+                        <span className="nearDaysWeather__information__day"><Moment format="ddd">{data.dt*1000}</Moment></span>
+                        <img src={`http://openweathermap.org/img/w/${data.weather[0].icon}.png`} alt={data.weather[0].description} className="nearDaysWeather__information__icon" />
+                        <span className="nearDaysWeather__information__temperature">{data.temp.day}°C</span>
+                    </div>
+                )
+            }
         </div>
     )
 }
