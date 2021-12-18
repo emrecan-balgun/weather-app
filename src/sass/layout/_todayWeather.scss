@@ -22,8 +22,17 @@
     }
 
     &__temperature {
-        font-weight: $font-medium;
-        font-size: $mega-font-size;
+        @include flexbox($direction: column);
+
+        &__information {
+            font-weight: $font-medium;
+            font-size: $mega-font-size;
+        }
+
+        &__max, &__min, &__seperator {
+            font-size: $normal-font-size;
+            font-weight: $font-extra-light;
+        }
     }
 
     &__status {

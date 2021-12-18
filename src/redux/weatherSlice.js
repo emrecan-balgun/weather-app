@@ -10,6 +10,8 @@ export const weatherSlice = createSlice({
     currentDescription: '',
     currentIcon: '',
     currentTemperature: '',
+    currentMinTemperature: '',
+    currentMaxTemperature: '',
     currentWind: '',
     currentHumidity: '',
     currentPressure: '',
@@ -36,6 +38,12 @@ export const weatherSlice = createSlice({
     changeCurrentTemperature: (state, action) => {
       state.currentTemperature = action.payload;
     },
+    changeCurrentMinTemperature: (state, action) => {
+      state.currentMinTemperature = action.payload;
+    },
+    changeCurrentMaxTemperature: (state, action) => {
+      state.currentMaxTemperature = action.payload;
+    },
     changeCurrentWind: (state, action) => {
       state.currentWind = action.payload;
     },
@@ -56,6 +64,8 @@ export const {
   changeCurrentDescription,
   changeCurrentIcon,
   changeCurrentTemperature,
+  changeCurrentMinTemperature,
+  changeCurrentMaxTemperature,
   changeCurrentWind,
   changeCurrentHumidity,
   changeCurrentPressure,
@@ -69,6 +79,8 @@ export const currentMainDescription = (state) => state.weather.currentMainDescri
 export const currentDescription = (state) => state.weather.currentDescription;
 export const currentIcon = (state) => state.weather.currentIcon;
 export const currentTemperature = (state) => state.weather.currentTemperature;
+export const currentMinTemperature = (state) => state.weather.currentMinTemperature;
+export const currentMaxTemperature = (state) => state.weather.currentMaxTemperature;
 export const currentWind = (state) => state.weather.currentWind;
 export const currentHumidity = (state) => state.weather.currentHumidity;
 export const currentPressure = (state) => state.weather.currentPressure;

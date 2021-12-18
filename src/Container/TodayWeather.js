@@ -8,6 +8,8 @@ import {
     currentDescription, 
     currentIcon, 
     currentTemperature, 
+    currentMinTemperature, 
+    currentMaxTemperature, 
     currentWind,
     currentHumidity, 
     currentPressure, 
@@ -15,6 +17,8 @@ import {
     changeCurrentDescription, 
     changeCurrentIcon, 
     changeCurrentTemperature, 
+    changeCurrentMinTemperature, 
+    changeCurrentMaxTemperature, 
     changeCurrentWind, 
     changeCurrentHumidity, 
     changeCurrentPressure,
@@ -33,6 +37,8 @@ function TodayWeather() {
     const description = useSelector(currentDescription);
     const icon = useSelector(currentIcon);
     const temperature = useSelector(currentTemperature);
+    const minTemperature = useSelector(currentMinTemperature);
+    const maxTemperature = useSelector(currentMaxTemperature);
     const wind = useSelector(currentWind);
     const humidity = useSelector(currentHumidity);
     const pressure = useSelector(currentPressure);
@@ -56,7 +62,7 @@ function TodayWeather() {
 
         if(lat != ''){
             axios(`https://api.openweathermap.org/data/2.5/find?q=${cityName}&units=metric&appid=${process.env.REACT_APP_API_KEY}`)
-            .then(response => console.log(response.data.list[0]))
+            .then(response => dispatchData(response.data.list[0]))
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [cityName])
@@ -71,6 +77,8 @@ function TodayWeather() {
 
     function dispatchData(response) {
         dispatch(changeCurrentTemperature((response.main.temp)));
+        dispatch(changeCurrentMinTemperature((response.main.temp_min)));
+        dispatch(changeCurrentMaxTemperature((response.main.temp_max)));
         dispatch(changeCurrentIcon(`http://openweathermap.org/img/w/${response.weather[0].icon}.png`));
         dispatch(changeCurrentMainDescription((response.weather[0].main)));
         dispatch(changeCurrentDescription((response.weather[0].description)));
@@ -85,7 +93,16 @@ function TodayWeather() {
                 <img className="todayWeather__weather__icon" src={icon} alt={mainDescription} />
                 <span className="todayWeather__weather__iconName">{description}</span>
             </div>
-            <span className="todayWeather__temperature">{Math.ceil(temperature)}°C</span>
+            <div className="todayWeather__temperature">
+                <span className="todayWeather__temperature__information">{Math.ceil(temperature)}°C</span>
+                <div>
+                    <span className="todayWeather__temperature__max">{Math.ceil(minTemperature)}°C</span>
+                    <span className="todayWeather__temperature__seperator"> / </span>
+                    <span className="todayWeather__temperature__min">{Math.ceil(maxTemperature)}°C</span>
+                </div>
+                
+            </div>
+            
             <div className="todayWeather__status">
                 <span className="todayWeather__status__wind">Wind: {wind} kmph</span>
                 <span className="todayWeather__status__precip">Humidity: {humidity}%</span>
