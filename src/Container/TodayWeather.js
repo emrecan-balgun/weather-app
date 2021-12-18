@@ -56,7 +56,7 @@ function TodayWeather() {
 
         if(lat != ''){
             axios(`https://api.openweathermap.org/data/2.5/find?q=${cityName}&units=metric&appid=${process.env.REACT_APP_API_KEY}`)
-            .then(response => dispatchData(response.data.list[0]))
+            .then(response => console.log(response.data.list[0]))
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [cityName])
