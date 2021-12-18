@@ -32,25 +32,23 @@ function NearDaysWeather() {
     }
 
     return (
-        <>
-        </>
-        // <div className="nearDaysWeather">
-        //     {
-        //         isLoading 
-        //         ? <div>Loading..</div>
-        //         : newData.map(data => 
-        //             <div className="nearDaysWeather__information" key={nanoid()}>
-        //                 <span className="nearDaysWeather__information__day"><Moment format="ddd">{data.dt*1000}</Moment></span>
-        //                 <img src={`http://openweathermap.org/img/w/${data.weather[0].icon}.png`} alt={data.weather[0].description} className="nearDaysWeather__information__icon" />
-        //                 <div className="nearDaysWeather__information__temperature">
-        //                     <span className="nearDaysWeather__information__temperature__morn">{Math.ceil(data.temp.morn)}°C</span>
-        //                     <span className="nearDaysWeather__information__temperature__seperator">/</span>
-        //                     <span className="nearDaysWeather__information__temperature__night">{Math.ceil(data.temp.night)}°C</span>
-        //                 </div>
-        //             </div>
-        //         )
-        //     }
-        // </div>
+        <div className="nearDaysWeather">
+            {
+                isLoading 
+                ? <div>Loading..</div>
+                : newData.map(data => 
+                    <div className="nearDaysWeather__information" key={nanoid()}>
+                        <span className="nearDaysWeather__information__day"><Moment format="ddd">{data.dt*1000}</Moment></span>
+                        <img src={`http://openweathermap.org/img/w/${data.weather[0].icon}.png`} alt={data.weather[0].description} className="nearDaysWeather__information__icon" />
+                        <div className="nearDaysWeather__information__temperature">
+                            <span className="nearDaysWeather__information__temperature__morn">{Math.ceil(data.temp.morn)}°C</span>
+                            <span className="nearDaysWeather__information__temperature__seperator">/</span>
+                            <span className="nearDaysWeather__information__temperature__night">{Math.ceil(data.temp.night)}°C</span>
+                        </div>
+                    </div>
+                )
+            }
+        </div>
     )
 }
 

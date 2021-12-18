@@ -32,12 +32,11 @@
             font-size: $small-font-size;
             margin-top: -10px;
         }
-
     }
 
     @media screen and (min-width: $smaller-screen2) {
         &__title {
-            width: 350px;
+            width: 300px;
             font-size: $big-font-size;
         }
 
