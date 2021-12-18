@@ -24,13 +24,14 @@ function NearDaysWeather() {
         }
     }, [lat, lon])
 
-
     // if you want a 5-day weather forecast it should be this way
     // in the case of i = 0, it shows the weather today
     // supports showing the weather for up to 7 days for the future, except today
     for(let i = 1; i <= 5; i++) {
         newData[i] = data[i];
     }
+
+    console.log(newData);
 
     return (
         <div className="nearDaysWeather">
@@ -41,7 +42,11 @@ function NearDaysWeather() {
                     <div className="nearDaysWeather__information" key={nanoid()}>
                         <span className="nearDaysWeather__information__day"><Moment format="ddd">{data.dt*1000}</Moment></span>
                         <img src={`http://openweathermap.org/img/w/${data.weather[0].icon}.png`} alt={data.weather[0].description} className="nearDaysWeather__information__icon" />
-                        <span className="nearDaysWeather__information__temperature">{data.temp.day}°C</span>
+                        <div className="nearDaysWeather__information__temperature">
+                            <span className="nearDaysWeather__information__temperature__morn">{Math.ceil(data.temp.morn)}°C</span>
+                            <span className="nearDaysWeather__information__temperature__seperator">/</span>
+                            <span className="nearDaysWeather__information__temperature__night">{Math.ceil(data.temp.night)}°C</span>
+                        </div>
                     </div>
                 )
             }

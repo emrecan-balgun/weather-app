@@ -21,8 +21,14 @@
         }
     
         &__temperature {
-            font-weight: $font-light;
-            font-size: $small-font-size;
+            @include flexbox($direction: row);
+            gap: 3px;
+
+            &__morn, &__night, &__seperator {
+                font-weight: $font-light;
+                font-size: $small-font-size;
+            }
+            
         }
     }
 

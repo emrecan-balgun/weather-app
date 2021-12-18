@@ -26,9 +26,12 @@ import {
     changeLatitude,
     changeLongitude
 } from '../redux/weatherSlice';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+
 
 function TodayWeather() {
+    const [isLoading, setIsLoading] = useState(true);
+
     const dispatch = useDispatch();
 
     const cityName = useSelector(city);
@@ -47,16 +50,9 @@ function TodayWeather() {
     function getGeocode() {
          axios(`http://api.positionstack.com/v1/forward?access_key=${process.env.REACT_APP_GECODE_KEY}&query=${cityName}`)
         .then(response => dispatchGeocode(response.data.data[0]))
+        .catch(e => console.log(e))
+        .finally(() => setIsLoading(false))
     }
-
-    // useEffect(() => {
-    //     getGeocode();
-
-    //     if(lat != '') {
-    //         axios(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely&units=metric&appid=${process.env.REACT_APP_API_KEY}`)
-    //         .then(response => dispatchData(response.data.current))
-    //     }
-    // }, [cityName])
 
     useEffect(() => {
         getGeocode();
@@ -64,14 +60,13 @@ function TodayWeather() {
         if(lat != ''){
             axios(`https://api.openweathermap.org/data/2.5/find?q=${cityName}&units=metric&appid=${process.env.REACT_APP_API_KEY}`)
             .then(response => dispatchData(response.data.list[0]))
+            .catch(e => console.log(e))
+            .finally(() => setIsLoading(false))
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [cityName])
 
     function dispatchGeocode(response) {
-        // console.log(response.name);
-        // console.log(response.latitude);
-        // console.log(response.longitude);
         dispatch(changeLatitude((response.latitude)));
         dispatch(changeLongitude((response.longitude)));
     }
@@ -91,25 +86,30 @@ function TodayWeather() {
 
     return (
         <div className="todayWeather">
-            <div className="todayWeather__weather">
-                <img className="todayWeather__weather__icon" src={icon} alt={mainDescription} />
-                <span className="todayWeather__weather__iconName"><strong>{description}</strong></span>
-            </div>
-            <div className="todayWeather__temperature">
-                <span className="todayWeather__temperature__information">{Math.ceil(temperature)}°C</span>
-                <div>
-                    <span className="todayWeather__temperature__max">{Math.ceil(minTemperature)}°C</span>
-                    <span className="todayWeather__temperature__seperator"> / </span>
-                    <span className="todayWeather__temperature__min">{Math.ceil(maxTemperature)}°C</span>
-                </div>
+            {
+                isLoading 
+                ? <div>Loading..</div>
+                : <>
+                    <div className="todayWeather__weather">
+                        <img className="todayWeather__weather__icon" src={icon} alt={mainDescription} />
+                        <span className="todayWeather__weather__iconName"><strong>{description}</strong></span>
+                    </div>
+                    <div className="todayWeather__temperature">
+                        <span className="todayWeather__temperature__information">{Math.ceil(temperature)}°C</span>
+                        <div>
+                            <span className="todayWeather__temperature__max">{Math.ceil(minTemperature)}°C</span>
+                            <span className="todayWeather__temperature__seperator"> / </span>
+                            <span className="todayWeather__temperature__min">{Math.ceil(maxTemperature)}°C</span>
+                        </div>
+                    </div>
                 
-            </div>
-            
-            <div className="todayWeather__status">
-                <span className="todayWeather__status__wind"><strong>Wind</strong> {wind} kmph</span>
-                <span className="todayWeather__status__precip"><strong>Humidity</strong> {humidity}%</span>
-                <span className="todayWeather__status__pressure"><strong>Pressure</strong> {pressure} mb</span>
-            </div>
+                    <div className="todayWeather__status">
+                        <span className="todayWeather__status__wind"><strong>Wind</strong> {wind} kmph</span>
+                        <span className="todayWeather__status__precip"><strong>Humidity</strong> {humidity}%</span>
+                        <span className="todayWeather__status__pressure"><strong>Pressure</strong> {pressure} mb</span>
+                    </div>
+                </>
+            }
         </div>
     )
 }

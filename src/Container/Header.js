@@ -9,8 +9,8 @@ function Header() {
 
     return (
         <div className="header">
-            <h1 className="header__title">{cityName}</h1>
-            <h2 className="header__date"><Moment format="YYYY/MM/DD">{time*1000}</Moment></h2> 
+            <h1 className="header__title">{cityName ? cityName : ''}</h1>
+            <h2 className="header__date">{time ? <Moment format="YYYY/MM/DD">{time*1000}</Moment> : ''}</h2> 
         </div>
     )
 }
