@@ -4,6 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Photos
 ![v2](public/main.jpg)
+![v2](public/main2.jpg)
 
 ## Technologies and tools I use
 
