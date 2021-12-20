@@ -2,6 +2,10 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Technologies and tools I use
+
+Redux, SASS, Axios, Nanoid, React-moment
+
 ## Available Scripts
 
 In the project directory, you can run:
