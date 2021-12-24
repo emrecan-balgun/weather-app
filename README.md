@@ -2,6 +2,11 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## .env API access key configure
+
+REACT_APP_API_KEY =  api acces key taken from openweathermap.org
+REACT_APP_GECODE_KEY =  api access key taken from positionstack.com
+
 ## Photos
 ![v2](public/main1.jpg)
 ![v2](public/main2.png)
