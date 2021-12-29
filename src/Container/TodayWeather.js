@@ -58,7 +58,7 @@ function TodayWeather() {
         getGeocode();
 
         if(lat != ''){
-            axios(`https://api.openweathermap.org/data/2.5/find?q=${cityName}&units=metric&appid=${process.env.REACT_APP_API_KEY}`)
+            axios(`http://api.openweathermap.org/data/2.5/find?q=${cityName}&units=metric&appid=${process.env.REACT_APP_API_KEY}`)
             .then(response => dispatchData(response.data.list[0]))
             .catch(e => console.log(e))
             .finally(() => setIsLoading(false))
