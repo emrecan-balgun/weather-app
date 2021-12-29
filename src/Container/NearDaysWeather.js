@@ -17,7 +17,7 @@ function NearDaysWeather() {
 
     useEffect(() => {
         if(lat !== '') {
-            axios(`http://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely&units=metric&appid=${process.env.REACT_APP_API_KEY}`)
+            axios(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely&units=metric&appid=${process.env.REACT_APP_API_KEY}`)
             .then(response => setData(response.data.daily))
             .catch(e => console.log(e))
             .finally(() => setIsLoading(false))
@@ -39,7 +39,7 @@ function NearDaysWeather() {
                 : newData.map(data => 
                     <div className="nearDaysWeather__information" key={nanoid()}>
                         <span className="nearDaysWeather__information__day"><Moment format="ddd">{data.dt*1000}</Moment></span>
-                        <img src={`http://openweathermap.org/img/w/${data.weather[0].icon}.png`} alt={data.weather[0].description} className="nearDaysWeather__information__icon" />
+                        <img src={`https://openweathermap.org/img/w/${data.weather[0].icon}.png`} alt={data.weather[0].description} className="nearDaysWeather__information__icon" />
                         <div className="nearDaysWeather__information__temperature">
                             <span className="nearDaysWeather__information__temperature__morn">{Math.ceil(data.temp.morn)}°C</span>
                             <span className="nearDaysWeather__information__temperature__seperator">/</span>
