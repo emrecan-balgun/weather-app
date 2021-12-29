@@ -16,7 +16,7 @@ function NearDaysWeather() {
     const newData = [];
 
     useEffect(() => {
-        if(lat != '') {
+        if(lat !== '') {
             axios(`http://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely&units=metric&appid=${process.env.REACT_APP_API_KEY}`)
             .then(response => setData(response.data.daily))
             .catch(e => console.log(e))

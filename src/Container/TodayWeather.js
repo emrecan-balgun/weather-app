@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { 
     city,
     latitude,
-    longitude,
     currentMainDescription, 
     currentDescription, 
     currentIcon, 
@@ -36,7 +35,6 @@ function TodayWeather() {
 
     const cityName = useSelector(city);
     const lat = useSelector(latitude);
-    const lon = useSelector(longitude);
     const mainDescription = useSelector(currentMainDescription);
     const description = useSelector(currentDescription);
     const icon = useSelector(currentIcon);
@@ -57,7 +55,7 @@ function TodayWeather() {
     useEffect(() => {
         getGeocode();
 
-        if(lat != ''){
+        if(lat !== ''){
             axios(`http://api.openweathermap.org/data/2.5/find?q=${cityName}&units=metric&appid=${process.env.REACT_APP_API_KEY}`)
             .then(response => dispatchData(response.data.list[0]))
             .catch(e => console.log(e))
