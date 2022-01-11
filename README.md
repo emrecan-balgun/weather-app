@@ -2,6 +2,9 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Live
+[Link](https://emron-weather-app.herokuapp.com)
+
 ## .env API access key configure
 
 REACT_APP_API_KEY =  api acces key taken from openweathermap.org
