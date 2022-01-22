@@ -9,7 +9,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 REACT_APP_API_KEY =  api acces key taken from openweathermap.org
 
-REACT_APP_GECODE_KEY =  api access key taken from positionstack.com
+REACT_APP_GECODE_KEY =  api access key taken from mapquest.com
 
 ## Photos
 ![v2](public/main1.jpg)
