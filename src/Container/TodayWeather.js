@@ -46,8 +46,8 @@ function TodayWeather() {
     const pressure = useSelector(currentPressure);
 
     function getGeocode() {
-         axios(`https://api.positionstack.com/v1/forward?access_key=${process.env.REACT_APP_GECODE_KEY}&query=${cityName}`)
-        .then(response => dispatchGeocode(response.data.data[0]))
+        axios(`http://open.mapquestapi.com/geocoding/v1/address?key=${process.env.REACT_APP_GECODE_KEY}&location=${cityName}`)
+        .then(response => dispatchGeocode(response.data.results[0].locations[0].displayLatLng))
         .catch(e => console.log(e))
         .finally(() => setIsLoading(false))
     }
@@ -56,7 +56,7 @@ function TodayWeather() {
         getGeocode();
 
         if(lat !== ''){
-            axios(`https://api.openweathermap.org/data/2.5/find?q=${cityName}&units=metric&appid=${process.env.REACT_APP_API_KEY}`)
+            axios(`http://api.openweathermap.org/data/2.5/find?q=${cityName}&units=metric&appid=${process.env.REACT_APP_API_KEY}`)
             .then(response => dispatchData(response.data.list[0]))
             .catch(e => console.log(e))
             .finally(() => setIsLoading(false))
@@ -65,8 +65,8 @@ function TodayWeather() {
     }, [cityName])
 
     function dispatchGeocode(response) {
-        dispatch(changeLatitude((response.latitude)));
-        dispatch(changeLongitude((response.longitude)));
+        dispatch(changeLatitude((response.lat)));
+        dispatch(changeLongitude((response.lng)));
     }
 
     function dispatchData(response) {
@@ -74,7 +74,7 @@ function TodayWeather() {
         dispatch(changeCurrentTemperature((response.main.temp)));
         dispatch(changeCurrentMinTemperature((response.main.temp_min)));
         dispatch(changeCurrentMaxTemperature((response.main.temp_max)));
-        dispatch(changeCurrentIcon(`https://openweathermap.org/img/w/${response.weather[0].icon}.png`));
+        dispatch(changeCurrentIcon(`http://openweathermap.org/img/w/${response.weather[0].icon}.png`));
         dispatch(changeCurrentMainDescription((response.weather[0].main)));
         dispatch(changeCurrentDescription((response.weather[0].description)));
         dispatch(changeCurrentWind((response.wind.speed)));
